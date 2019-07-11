@@ -1,13 +1,15 @@
 <template>
   <el-container class="home">
-    <el-aside width="200px" class="aside">
-      <div class="log"></div>
+    <el-aside :width="isCollapse?'64px':'200px'" class="aside" >
+      <div class="log" :class="{little:isCollapse}"></div>
       <el-menu
         default-active="1"
         class="el-menu-vertical-demo"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
+        :collapse="isCollapse"
+        :collapse-transition="false"
       >
         <router-link to="/">
           <el-menu-item index="1">
@@ -55,7 +57,7 @@
     </el-aside>
     <el-container>
       <el-header height="60px" class="head">
-        <span class="el-icon-s-fold"></span>
+        <span class="el-icon-s-fold" @click="tag"></span>
         <span>江苏传智播客教育科技有限公司</span>
         <el-dropdown class="set">
           <span class="el-dropdown-link">
@@ -79,7 +81,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    tag () {
+      this.isCollapse = !this.isCollapse
+    }
+  },
+  data () {
+    return {
+      isCollapse: false
+    }
+  }
+}
 </script>
 
 <style lang="less">
@@ -125,6 +138,9 @@ export default {}
     }
     a{
       text-decoration: none;
+    }
+    .little{
+      background: url(../../assets/images/logo_admin_01.png) no-repeat center / 22px
     }
   }
 }
