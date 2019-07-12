@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import elementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import router from '@/router'
-import axios from 'axios'
+import router from '@/router/router.js'
+import axios from '@/api/axios.js'
 Vue.use(elementUi)
 Vue.prototype.axios = axios
 

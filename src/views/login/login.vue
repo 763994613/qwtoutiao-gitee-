@@ -32,7 +32,20 @@ export default {
     submitForm (ruleForm) {
       this.$refs[ruleForm].validate((valid) => {
         if (valid) {
-          this.$routers.push('/')
+          this.axios
+            .post('authorizations', this.ruleForm)
+            .then((res) => {
+              window.sessionStorage.setItem('qwId', JSON.stringify(res.data.data))
+              this.$router.push('/')
+              console.log(res)
+            })
+            // eslint-disable-next-line handle-callback-err
+            .catch((err) => {
+              this.$message({
+                message: '登陆失败',
+                type: 'warning'
+              })
+            })
         } else {
           this.$message({
             message: '登陆失败',
@@ -46,13 +59,15 @@ export default {
     const checkMobile = (rule, val, callback) => {
       if (!/^[1][3-9]\d{9}$/.test(val)) {
         return callback(new Error('手机号码格式错误'))
+      } else {
+        callback()
       }
     }
     return {
       checked: true,
       ruleForm: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       rules: {
         mobile: [
