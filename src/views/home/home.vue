@@ -3,7 +3,7 @@
     <el-aside :width="isCollapse?'64px':'200px'" class="aside" >
       <div class="log" :class="{little:isCollapse}"></div>
       <el-menu
-        default-active="/"
+        :default-active="$route.path"
         class="el-menu-vertical-demo"
         background-color="#002033"
         text-color="#fff"
@@ -48,15 +48,15 @@
         <span>江苏传智播客教育科技有限公司</span>
         <el-dropdown class="set">
           <span class="el-dropdown-link">
-            <img src="../../assets/images/avatar.jpg" alt width="28" />
-            <strong>黑马小哥</strong>
+            <img :src="pic" alt width="28" />
+            <strong>{{name}}</strong>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>
+            <el-dropdown-item @click.native='setting'>
               <span class="el-icon-setting"></span> 个人设置
             </el-dropdown-item>
-            <el-dropdown-item>
+            <el-dropdown-item @click.native='quit'>
               <span class="el-icon-unlock"></span> 退出登录
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -69,14 +69,28 @@
 
 <script>
 export default {
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('qwId'))
+    this.name = user.name
+    this.pic = user.photo
+  },
   methods: {
     tag () {
       this.isCollapse = !this.isCollapse
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    quit () {
+      window.sessionStorage.removeItem('qwId')
+      this.$router.push('/login')
     }
   },
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      pic: ''
     }
   }
 }

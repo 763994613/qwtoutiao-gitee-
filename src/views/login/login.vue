@@ -30,22 +30,18 @@
 export default {
   methods: {
     submitForm (ruleForm) {
-      this.$refs[ruleForm].validate((valid) => {
+      this.$refs[ruleForm].validate(async (valid) => {
         if (valid) {
-          this.axios
-            .post('authorizations', this.ruleForm)
-            .then((res) => {
-              window.sessionStorage.setItem('qwId', JSON.stringify(res.data.data))
-              this.$router.push('/')
-              console.log(res)
+          try {
+            const res = await this.axios.post('authorizations', this.ruleForm)
+            window.sessionStorage.setItem('qwId', JSON.stringify(res.data.data))
+            this.$router.push('/')
+          } catch (err) {
+            this.$message({
+              message: '登陆失败',
+              type: 'warning'
             })
-            // eslint-disable-next-line handle-callback-err
-            .catch((err) => {
-              this.$message({
-                message: '登陆失败',
-                type: 'warning'
-              })
-            })
+          }
         } else {
           this.$message({
             message: '登陆失败',
@@ -66,7 +62,7 @@ export default {
     return {
       checked: true,
       ruleForm: {
-        mobile: '13911111111',
+        mobile: '18611298526',
         code: '246810'
       },
       rules: {
