@@ -62,7 +62,9 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
-      <router-view></router-view>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -101,6 +103,8 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
+  left: 0;
+  left: 0;
   .head {
     border-bottom: 1px solid #ddd;
     span {
@@ -124,7 +128,6 @@ export default {
       }
     }
   }
-
   .aside {
     background-color: #002033;
     border: none;

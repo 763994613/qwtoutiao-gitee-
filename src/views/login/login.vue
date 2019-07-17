@@ -62,7 +62,7 @@ export default {
     return {
       checked: true,
       ruleForm: {
-        mobile: '18611298526',
+        mobile: '13911111111',
         code: '246810'
       },
       rules: {

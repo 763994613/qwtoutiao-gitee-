@@ -1,13 +1,20 @@
 import axios from 'axios'
+import JSONbig from 'json-bigint'
 const instance = axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn/mp/v1_0/'
+  baseURL: 'http://ttapi.research.itcast.cn/mp/v1_0/',
+  transformResponse: [function (data, headers) {
+    if (data) {
+      return JSONbig.parse(data)
+    }
+    return data
+  }]
 })
 
-axios.interceptors.request.use(function (config) {
-  let user = JSON.parse(window.sessionStorage.getItem('qwId')).token
+instance.interceptors.request.use(function (config) {
+  let user = window.sessionStorage.getItem('qwId')
   if (user) {
     config.headers = {
-      Authorization: 'Bearer ' + user
+      Authorization: 'Bearer ' + JSON.parse(user).token
     }
   }
   return config
@@ -15,10 +22,10 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 
-axios.interceptors.response.use(function (response) {
+instance.interceptors.response.use(function (response) {
   return response
 }, function (error) {
-  if (error.response.status === 401) {
+  if (error.response && error.response.status === 401) {
     location.hash = '#/login'
   }
   return Promise.reject(error)
