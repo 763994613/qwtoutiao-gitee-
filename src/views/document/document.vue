@@ -19,15 +19,7 @@
         </el-form-item>
 
         <el-form-item label="频道：">
-            <!-- <el-select v-model="reqProblem.channel_id" placeholder="请选择" size="small">
-                <el-option
-                v-for="item in channelOptions"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id">
-                </el-option>
-            </el-select> -->
-            <my-channel v-model="reqProblem.channel_id"></my-channel>
+          <my-channel v-model="reqProblem.channel_id"></my-channel>
         </el-form-item>
 
         <el-form-item label="时间：" size="small">
