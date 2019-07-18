@@ -133,7 +133,7 @@ export default {
       this.getList()
     },
     edit (id) {
-      this.$router.push(`/news/${id}`)
+      this.$router.push(`/news?id=${id}`)
     },
     async del (id) {
       await this.axios.delete(`/articles/${id}`)

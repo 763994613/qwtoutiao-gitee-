@@ -83,7 +83,6 @@ export default {
       const {
         data: { data }
       } = await this.axios('/user/images', { params: this.queryList })
-      console.log(data)
       this.results = data.results
       this.total_count = data.total_count
       this.queryList.page = data.page
