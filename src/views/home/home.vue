@@ -70,11 +70,18 @@
 </template>
 
 <script>
+import eventBus from '@/views/eventBus/eventBus.js'
 export default {
   created () {
     const user = JSON.parse(window.sessionStorage.getItem('qwId'))
     this.name = user.name
     this.pic = user.photo
+    eventBus.$on('updateMessage', (val) => {
+      this.name = val
+    })
+    eventBus.$on('updatePhoto', (val) => {
+      this.pic = val
+    })
   },
   methods: {
     tag () {
@@ -124,6 +131,9 @@ export default {
         img {
           vertical-align: middle;
           padding-right: 6px;
+          height: 30px;
+          width: 30px;
+          border-radius:50%;
         }
       }
     }
