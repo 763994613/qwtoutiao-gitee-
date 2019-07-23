@@ -13,7 +13,7 @@ import fans from '@/views/fans/fans.vue'
 
 Vue.use(VueRouter)
 const router = new VueRouter({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     { name: 'login', path: '/login', component: login },
     { path: '/',
